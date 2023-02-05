@@ -10,11 +10,6 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField]
     [Range(1, 5)] private float _enemySpawnDelay;
 
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
         Init();
