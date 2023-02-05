@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using Random = UnityEngine.Random;
 
-public class EnemyBehaviorManager : MonoBehaviour
+public class CharacterBehaviorManagerBase : MonoBehaviour
 {
     [SerializeField] 
     [Range(-10, 10)] private float _moveSpeed;
@@ -20,7 +21,12 @@ public class EnemyBehaviorManager : MonoBehaviour
 
     private void Start()
     {
+        var randomDir = Random.insideUnitSphere;
+        randomDir.z = 0;
 
+        _moveManager.MoveAction?.Invoke(
+            transform.position + randomDir, 
+            _moveSpeed);
     }
 
     void Update()
@@ -31,13 +37,15 @@ public class EnemyBehaviorManager : MonoBehaviour
 
     private void EnemyMoving()
     {
-        _moveManager.MoveAction?.Invoke
-            ((transform.position - Vector3.zero).normalized,
+        _moveManager.MoveAction?.Invoke(
+            (transform.position - Vector3.zero).normalized,
             _moveSpeed);
     }
 
     private void EnemyRotating()
     {
-        _moveManager.RotateAction?.Invoke(Vector3.zero, _rotateSpeed);
+        _moveManager.RotateAction?.Invoke(
+            Vector3.zero, 
+            _rotateSpeed);
     }
 }

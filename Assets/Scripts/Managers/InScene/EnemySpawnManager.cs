@@ -22,12 +22,14 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void Init()
     {
-        InvokeRepeating(nameof(SpawnEnemyAtPosition), 1, _enemySpawnDelay);
+        _enemySpawnController.InitializeDictionary();
+
+        InvokeRepeating(nameof(SpawnEnemy), 1, _enemySpawnDelay);
     }
 
-    private void SpawnEnemyAtPosition(Vector3 pos)
+    private void SpawnEnemy()
     {
         // spawn only enemy_01 type for this project
-        _enemySpawnController.SpawnEnemyAtPosition("enemy_01", pos);
+        _enemySpawnController.SpawnEnemyAtPosition("enemy_01", Vector2.zero);
     }
 }

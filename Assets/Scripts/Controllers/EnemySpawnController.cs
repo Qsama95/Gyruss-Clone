@@ -20,12 +20,7 @@ public class EnemySpawnController : ScriptableObject
     private Dictionary<string, GameObject> _enemyIdPrefabDictionary
         = new Dictionary<string, GameObject>();
 
-    private void Awake()
-    {
-        InitializeDictionary();
-    }
-
-    private void InitializeDictionary()
+    public void InitializeDictionary()
     {
         foreach (EnemyIDPrefabPair pair in _enemyIdPrefabPairs)
         {
