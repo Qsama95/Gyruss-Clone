@@ -6,8 +6,10 @@ using Random = UnityEngine.Random;
 
 public class EnemyBehaviorManager : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _rotateSpeed;
+    [SerializeField] 
+    [Range(-10, 10)] private float _moveSpeed;
+    [SerializeField]
+    [Range(-10, 10)] private float _rotateSpeed;
 
     private CharacterMotionManagerBase _moveManager;
 

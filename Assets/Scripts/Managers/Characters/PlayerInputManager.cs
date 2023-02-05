@@ -11,6 +11,7 @@ public class PlayerInputManager : MonoBehaviour
     private void Awake()
     {
         _moveManager = GetComponent<CharacterMotionManagerBase>();
+        _shootingManager = GetComponent<CharacterShootingManagerBase>();
     }
 
     private void Update()
@@ -33,9 +34,9 @@ public class PlayerInputManager : MonoBehaviour
 
     private void DetectShootInput()
     {
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _shootingManager.ShootingAction?.Invoke(transform.up);
+            _shootingManager.ShootingAction?.Invoke();
         }
     }
 }
