@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMoveManager : CharacterMoveManagerBase
+public class EnemyMotionManager : CharacterMotionManagerBase
 {
 
 }
