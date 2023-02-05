@@ -29,7 +29,7 @@ public class ShootingController : ScriptableObject
     /// <summary>
     /// shoot bullet towards given direction
     /// </summary>
-    /// /// <param name="startPos"></param>
+    /// <param name="startPos"></param>
     /// <param name="dir"></param>
     public void ShootBullet(Vector3 startPos, Vector3 dir)
     {
