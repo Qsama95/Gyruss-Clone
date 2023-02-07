@@ -29,9 +29,10 @@ public class EnemySpawnController : ScriptableObject
     }
 
     /// <summary>
-    /// spawn enemy with a delay
+    /// spawn enemy at pos with id
     /// </summary>
-    /// <param name="delay"></param>
+    /// <param name="enemyId"></param>
+    /// <param name="pos"></param>
     public void SpawnEnemyAtPosition(string enemyId, Vector3 pos)
     {
         if (_enemyIdPrefabDictionary.ContainsKey(enemyId))
