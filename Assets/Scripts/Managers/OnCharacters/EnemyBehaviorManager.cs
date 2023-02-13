@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(CharacterMotionManagerBase))]
 public class EnemyBehaviorManager : MonoBehaviour
 {
     [Header("Motions")]
@@ -19,27 +20,34 @@ public class EnemyBehaviorManager : MonoBehaviour
     private int _moveMultiplier = 1;
     private float _distanceToCenter;
 
-    private CharacterMotionManagerBase _moveManager;
+    private CharacterMotionManagerBase _motionManager;
 
     public float DistanceToCenter { get => _distanceToCenter; set => _distanceToCenter = value; }
 
     private void Awake()
     {
-        _moveManager = GetComponent<CharacterMotionManagerBase>();
+        _motionManager = GetComponent<CharacterMotionManagerBase>();
     }
 
     private void Start()
     {
-        var randomDir = Random.insideUnitSphere;
-        randomDir.z = 0;
+        Init();
+
+        // do orbit motion after every certain delay
+        InvokeRepeating(nameof(RandomOrbitMotion), 1, 5);
+    }
+
+    private void Init()
+    {
+        // initilize random rotaion speed and move speed
         _rotateSpeed = Random.Range(15, 25);
         _moveInAndOutSpeed = Random.Range(1, 10);
         _initialMoveSpeed = _moveInAndOutSpeed;
 
+        // start to move to an random dir
+        var randomDir = Random.insideUnitSphere;
+        randomDir.z = 0;
         transform.DOMove(transform.position + randomDir, 1);
-
-        // do orbit motion after every certain delay
-        InvokeRepeating(nameof(RandomOrbitMotion), 1, 5);
     }
 
     void Update()
@@ -51,14 +59,14 @@ public class EnemyBehaviorManager : MonoBehaviour
 
     private void EnemyMoving()
     {
-        _moveManager.MoveAction?.Invoke(
+        _motionManager.MoveAction?.Invoke(
             (transform.position - Vector3.zero).normalized,
             _moveInAndOutSpeed * _moveMultiplier);
     }
 
     private void EnemyRotating()
     {
-        _moveManager.RotateAction?.Invoke(
+        _motionManager.RotateAction?.Invoke(
             Vector3.zero, 
             _rotateSpeed);
     }

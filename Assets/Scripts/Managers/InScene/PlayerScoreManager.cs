@@ -34,7 +34,9 @@ public class PlayerScoreManager : MonoBehaviour
 
     private void OnUpdateScore(int score)
     {
-        _currentScore += score;
-        _currentScoreTMP.text = _currentScore.ToString();
+        _currentScore = _playerScoreController.UpdateScoreOnScreen(
+            _currentScore,
+            _currentScoreTMP,
+            score);
     }
 }
